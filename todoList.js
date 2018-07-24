@@ -1,5 +1,3 @@
-
-
 module.exports = class TodoList {
 
   constructor() {

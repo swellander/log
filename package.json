@@ -4,13 +4,16 @@
   "description": "Web app used to keep track of all time spent a grindin'",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon node_modules/.bin/mocha"
+    "test": "nodemon node_modules/.bin/mocha",
+    "start:dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.1.2",
+    "express": "^4.16.3",
     "mocha": "^5.2.0",
+    "pg": "^7.4.3",
     "uuid": "^3.3.2"
   }
 }
