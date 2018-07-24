@@ -1,0 +1,11 @@
+{
+  "name": "code_log",
+  "version": "1.0.0",
+  "description": "Web app used to keep track of all time spent a grindin'",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon node_modules/.bin/mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
