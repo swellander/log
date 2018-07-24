@@ -7,5 +7,10 @@
     "test": "nodemon node_modules/.bin/mocha"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "uuid": "^3.3.2"
+  }
 }
