@@ -29,4 +29,4 @@ app.post('/', (req, res) => {
   res.send(taskList(list.getTasks()));
 })
 
-app.listen(port, () => `Listening on port ${port}`);
+app.listen(port, () => console.log(`Listening on port ${port}`));
