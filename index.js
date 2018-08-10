@@ -6,6 +6,7 @@ const TodoList = require('./todoList');
 const taskList = require('./views/taskList');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
+const db = require('./db');
 
 const list = new TodoList();
 list.add('Mow Lawn', 0);
@@ -29,4 +30,6 @@ app.post('/', (req, res) => {
   res.send(taskList(list.getTasks()));
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+db.syncSeed() 
+  .then( () => app.listen(port, () => console.log(`Listening on port ${port}`)));
+
