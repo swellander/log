@@ -1,27 +1,14 @@
 import React from 'react';
-import TaskList from './TaskList';
-import axios from 'axios'
+import Header from './Header';
+import Body from './Body';
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tasks: [] 
-    }
-  }
-
-  async componentDidMount() {
-    const response = await axios.get('/api/tasks'); 
-    this.setState({ tasks: response.data });
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <TaskList tasks={this.state.tasks} />
-      </div>
-    )
-  }
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <Body />
+    </div>
+  )
 };
 
 export default App;

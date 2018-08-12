@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = new Sequelize(process.env.DATABASE_URL);
+const connection = new Sequelize(process.env.DATABASE_URL, { logging: false });
 const seedTasks = require('./seed');
 
 const Task = connection.define('task', {
@@ -25,6 +25,12 @@ const Task = connection.define('task', {
     type: Sequelize.DATE
   }
 });
+
+Task.beforeValidate( instance => {
+  if(typeof instance.tags === 'string') {
+    instance.tags = instance.tags.split(', ').map( tag => tag.trim()); 
+  }
+})
 
 const syncSeed = async () => {
   await connection.sync({ force: true });
