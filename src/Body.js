@@ -39,8 +39,8 @@ class Body extends React.Component {
     }));
   }
 
-  completeTask(id) {
-    axios.put('/tasks/' + id)
+  completeTask(id, duration) {
+    axios.put('/tasks/' + id, {duration})
       .then( response => console.log(response.data))
       .catch(err => console.log(err));
   }

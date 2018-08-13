@@ -21,8 +21,8 @@ const Task = connection.define('task', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  completedAt: {
-    type: Sequelize.DATE
+  duration: {
+    type: Sequelize.INTEGER
   }
 });
 
