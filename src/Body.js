@@ -4,6 +4,8 @@ import TaskList from './TaskList';
 import TaskDetail from './TaskDetail';
 import NewTaskForm from './NewTaskForm';
 
+
+
 class Body extends React.Component {
   constructor() {
     super();
@@ -11,12 +13,16 @@ class Body extends React.Component {
       tasks: [],
       selectedTask: {}
     }
+    this.completeTask = this.completeTask.bind(this);
     this.addTask = this.addTask.bind(this);
     this.onSelectTask = this.onSelectTask.bind(this);
   }
 
   async componentDidMount() {
-    const response = await axios.get('/api/tasks'); 
+    const response = await axios.get('/api/tasks/today'); 
+    const str = response.data[0].createdAt;
+    const date = new Date(str);
+    console.log(date);
     this.setState({ tasks: response.data });
   }
 
@@ -33,7 +39,12 @@ class Body extends React.Component {
     this.setState( prevState => ({
       tasks: [...prevState.tasks, task]
     }));
-    console.log(this.state.tasks);
+  }
+
+  completeTask(id) {
+    axios.put('/tasks/' + id)
+      .then( response => console.log(response.data))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -42,7 +53,6 @@ class Body extends React.Component {
       width: '100vw'
     }
 
-    console.log('Body is rendering');
 
     return (
       <div style={ divStyle } className="row">
@@ -51,7 +61,7 @@ class Body extends React.Component {
           selectedTask={this.state.selectedTask}
           handleSelectTask={this.onSelectTask}
         />
-        { this.state.selectedTask.id ? <TaskDetail task={this.state.selectedTask}/> : '' }
+        { this.state.selectedTask.id ? <TaskDetail completeTask={this.completeTask} task={this.state.selectedTask}/> : '' }
         <NewTaskForm addTask={this.addTask}/>
       </div>
     )

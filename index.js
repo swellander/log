@@ -4,6 +4,13 @@ const port = process.env.PORT || 3001;
 const { syncSeed, Task } = require('./db');
 const path = require('path');
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
+//get todays date
+const today = new Date();
+// flatten time because we just want to work with today's date
+today.setHours(0,0,0,0);
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -18,13 +25,34 @@ app.get('/', (req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
+  console.log(req.body);
   Task.create(req.body)
     .then( newTask => res.send( newTask ));
-})
+});
 
-app.get('/api/tasks', (req, res, next) => {
-  Task.findAll()
-    .then( tasks => res.send(tasks))
+app.put('/tasks/:id', (req, res, next) => {
+  console.log('put request!')
+  Task.update({
+    completed: true 
+  }, {
+    where: { id: req.params.id }
+  })
+    .then( updatedTask => res.send(updatedTask))
+    .catch(next);
+});
+
+app.get('/api/tasks/today', (req, res, next) => {
+  Task.findAll({
+    where: {
+      createdAt: {
+        [Op.gte]: today
+      }
+    }
+  })
+    .then( tasks => {
+      console.log(tasks);
+      res.send(tasks);
+    })
     .catch(next);
 });
 
@@ -34,6 +62,8 @@ app.get('/api/tasks/:id', (req, res) => {
   })
     .then( task => res.send(task) );
 });
+
+
 
 syncSeed() 
   .then( () => app.listen(port, () => console.log(`Listening on port ${port}`)));

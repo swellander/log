@@ -21,14 +21,23 @@ class NewTaskForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-
-    const task = {
+    let task = {
       name: this.state.name,
       tags: this.state.tags
     }
 
     const { data } = await axios.post('/tasks', task);
     this.props.addTask(data);
+   
+    //get coordinates
+    // await navigator.geolocation.getCurrentPosition( position => {
+    //   task.latitude = position.coords.latitude;
+    //   task.longitude = position.coords.longitude;
+    //   console.log(task);
+    //   axios.post('/tasks', task)
+    // })
+    
+    
 
     //clear inputs
     this.setState({ name: '', tags: '' })
@@ -38,7 +47,7 @@ class NewTaskForm extends React.Component {
 
   render() {
     return (
-      <div className="col-sm-10 container offset-sm-1">
+      <div className="col-sm-3 container offset-sm-4">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Name</label>
