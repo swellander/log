@@ -49,10 +49,7 @@ app.get('/api/tasks/today', (req, res, next) => {
       }
     }
   })
-    .then( tasks => {
-      console.log(tasks);
-      res.send(tasks);
-    })
+    .then( tasks => res.send(tasks))
     .catch(next);
 });
 

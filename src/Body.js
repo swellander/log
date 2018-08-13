@@ -20,10 +20,8 @@ class Body extends React.Component {
 
   async componentDidMount() {
     const response = await axios.get('/api/tasks/today'); 
-    const str = response.data[0].createdAt;
-    const date = new Date(str);
-    console.log(date);
     this.setState({ tasks: response.data });
+    console.log(response.data);
   }
 
   async onSelectTask(id) {
