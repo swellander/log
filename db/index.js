@@ -22,7 +22,8 @@ const Task = connection.define('task', {
     defaultValue: false
   },
   duration: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 });
 

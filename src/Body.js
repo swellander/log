@@ -1,34 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import TaskList from './TaskList';
-import TaskDetail from './TaskDetail';
+import TaskControl from './TaskControl';
 import NewTaskForm from './NewTaskForm';
+
 
 class Body extends React.Component {
   constructor() {
     super();
     this.state = {
-      tasks: [],
-      selectedTask: {}
+      tasks: []
     }
-    this.completeTask = this.completeTask.bind(this);
+    this.start = this.start.bind(this);
     this.addTask = this.addTask.bind(this);
-    this.onSelectTask = this.onSelectTask.bind(this);
   }
 
   async componentDidMount() {
     const response = await axios.get('/api/tasks/today'); 
     this.setState({ tasks: response.data });
-    console.log(response.data);
-  }
-
-  async onSelectTask(id) {
-    if(this.state.selectedTask.id === id) {
-      this.setState({ selectedTask: {} });
-      return;
-    }
-    const response = await axios.get('/api/tasks/' + id);
-    this.setState({ selectedTask: response.data });
   }
 
   addTask(task) {
@@ -37,27 +25,30 @@ class Body extends React.Component {
     }));
   }
 
-  completeTask(id, duration) {
-    axios.put('/tasks/' + id, {duration})
-      .then( response => console.log(response.data))
-      .catch(err => console.log(err));
+  start() {
+    const { selectedTask } = this.state;
+    const newInterval = Object.assign({}, selectedTask);
+    newInterval.timer = setInterval(() => {
+      const newSelectedTask = Object.assign({}, this.state.selectedTask);
+      newSelectedTask.duration ++;
+      this.setState({ selectedTask: newSelectedTask })
+    }, 1000);
+
+    this.setState({ selectedTask: newInterval });
+  }
+
+  stop() {
+    alert('stop')
   }
 
   render() {
     const divStyle = {
       height: '100vh',
       width: '100vw'
-    }
-
-
+    } 
     return (
-      <div style={ divStyle } className="row">
-        <TaskList 
-          tasks={this.state.tasks} 
-          selectedTask={this.state.selectedTask}
-          handleSelectTask={this.onSelectTask}
-        />
-        { this.state.selectedTask.id ? <TaskDetail completeTask={this.completeTask} task={this.state.selectedTask}/> : '' }
+      <div style={ divStyle }>
+        <TaskControl tasks={this.state.tasks}/> 
         <NewTaskForm addTask={this.addTask}/>
       </div>
     )

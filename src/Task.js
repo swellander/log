@@ -1,14 +1,16 @@
 import React from 'react';
+import TaskDetail from './TaskDetail';
 
 const Task = ({ selectedTask, task, handleSelectTask }) => {
   const isSelected = selectedTask.id === task.id;
   const status = isSelected ? 'active' : '';
-  const completed = task.completed ? 'bg-success' : '';
-  console.log(completed);
   return (
-    <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status} ${completed}`}>
-      { task.name } 
-    </li>  
+    <div>
+      <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
+        { task.name } 
+      </li>  
+      { isSelected ? <TaskDetail task={task} /> : '' }
+    </div>
   ) }
 
 export default Task;
