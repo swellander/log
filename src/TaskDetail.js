@@ -7,14 +7,12 @@ class TaskDetail extends React.Component {
 
     this.state = {
       elapsed: 0,
-      start: {}
+      start: 0 
     }
 
+    this.pause = this.pause.bind(this);
     this.tick = this.tick.bind(this);
     this.start = this.start.bind(this);
-  }
-
-  comonentDidMount() {
   }
 
   tick() {
@@ -22,8 +20,12 @@ class TaskDetail extends React.Component {
   }
 
   start() {
-    this.setState({ start: Date.now() })
+    if(this.state.start === 0) this.setState({ start: Date.now() })
     this.timer = setInterval(this.tick, 1000);
+  }
+
+  pause() {
+    clearInterval(this.timer);
   }
 
   render() { 
@@ -45,6 +47,7 @@ class TaskDetail extends React.Component {
               { task.tags.map( (tag, i) => <li key={i}>{ tag }</li> ) }
             </ul>
             <button type="button" className="btn btn-primary" onClick={() => this.start()}>Start</button>
+            <button type="button" className="btn btn-warning" onClick={() => this.pause()}>Pause</button>
             <button onClick={() => completeTask(task.id, this.state.elapsed)} type="button" className="btn btn-success">Complete</button>
           </div>
         </div> 

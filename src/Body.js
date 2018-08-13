@@ -4,8 +4,6 @@ import TaskList from './TaskList';
 import TaskDetail from './TaskDetail';
 import NewTaskForm from './NewTaskForm';
 
-
-
 class Body extends React.Component {
   constructor() {
     super();
