@@ -4,8 +4,10 @@ import TaskDetail from './TaskDetail';
 class Task extends React.Component {
   constructor(props) {
     super();
+    const { task } = props;
     this.state = {
-      duration: props.task.duration
+      duration: task.duration,
+      complete: task.complete
     }
     const methodNames = ['start', 'stop'];
     methodNames.forEach(name => this[name] = this[name].bind(this));

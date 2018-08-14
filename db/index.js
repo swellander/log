@@ -17,7 +17,7 @@ const Task = connection.define('task', {
   longitude: {
     type: Sequelize.INTEGER
   },
-  completed: {
+  complete: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
