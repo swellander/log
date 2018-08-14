@@ -9,7 +9,7 @@ class TaskList extends React.Component {
     this.state = {
       selectedTask: {} 
     }
-   
+    this.completeTask = this.completeTask.bind(this); 
     this.onSelectTask = this.onSelectTask.bind(this);
   }
 
@@ -37,6 +37,7 @@ class TaskList extends React.Component {
           {tasks.map( task =>  {
             return (
               <Task 
+                completeTask={this.completeTask}
                 handleSelectTask={this.onSelectTask} 
                 selectedTask={this.state.selectedTask}
                 key={task.id} 

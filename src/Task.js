@@ -24,7 +24,7 @@ class Task extends React.Component {
   }
 
   render() {
-    const { selectedTask, task, handleSelectTask } = this.props;
+    const { selectedTask, task, handleSelectTask, completeTask } = this.props;
     const isSelected = selectedTask.id === task.id;
     const status = isSelected ? 'active' : '';
     return (
@@ -38,6 +38,7 @@ class Task extends React.Component {
               task={task} 
               start={this.start}
               stop={this.stop}
+              completeTask={completeTask}
             /> : '' }
       </div>
     )

@@ -17,7 +17,7 @@ const TaskDetail = ({ duration, start, stop, task, completeTask }) => {
           </ul>
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
           <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>
-          <button onClick={() => completeTask(task.id, this.state.elapsed)} type="button" className="btn btn-success">Complete</button>
+          <button onClick={() => completeTask(task.id, duration)} type="button" className="btn btn-success">Complete</button>
        </li>
     )
 }
