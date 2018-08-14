@@ -9,7 +9,7 @@ class Task extends React.Component {
       duration: task.duration,
       complete: task.complete
     }
-    const methodNames = ['start', 'stop'];
+    const methodNames = ['handleComplete', 'start', 'stop'];
     methodNames.forEach(name => this[name] = this[name].bind(this));
   }
 
@@ -25,14 +25,22 @@ class Task extends React.Component {
     clearInterval(this.timer);
   }
 
+  handleComplete (id, duration) {
+    this.stop();
+    this.setState({ complete: true });
+    this.props.completeTask(id, duration);
+  }
+
   render() {
     const { selectedTask, task, handleSelectTask, completeTask } = this.props;
     const isSelected = selectedTask.id === task.id;
     const status = isSelected ? 'active' : '';
+    const completeClass = this.state.complete ? 'text-success' : '';
+
     return (
       <div>
         <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
-          { task.name } 
+          <span className={completeClass}>{ task.name }</span> 
         </li>  
         { isSelected ? 
             <TaskDetail 
@@ -40,7 +48,8 @@ class Task extends React.Component {
               task={task} 
               start={this.start}
               stop={this.stop}
-              completeTask={completeTask}
+              completeTask={this.handleComplete}
+              complete={this.state.complete}
             /> : '' }
       </div>
     )
