@@ -44,10 +44,11 @@ class Body extends React.Component {
   render() {
     const divStyle = {
       height: '100vh',
-      width: '100vw'
+      width: '100vw',
+      marginTop: '20px'
     } 
     return (
-      <div style={ divStyle }>
+      <div className="row" style={ divStyle }>
         <TaskList tasks={this.state.tasks}/> 
         <NewTaskForm addTask={this.addTask}/>
       </div>

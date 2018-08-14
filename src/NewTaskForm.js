@@ -47,7 +47,7 @@ class NewTaskForm extends React.Component {
 
   render() {
     return (
-      <div className="col-sm-3 container offset-sm-4">
+      <div className="col-sm-3 container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Name</label>

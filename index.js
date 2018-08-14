@@ -31,8 +31,9 @@ app.post('/tasks', (req, res) => {
 });
 
 app.put('/tasks/:id', (req, res, next) => {
+  console.log(req.body);
   Task.update({
-    complete: true,
+    complete: req.body.complete,
     duration: req.body.duration
   }, {
     where: { id: req.params.id }

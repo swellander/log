@@ -30,6 +30,7 @@ const Task = connection.define('task', {
 Task.beforeValidate( instance => {
   if(typeof instance.tags === 'string') {
     instance.tags = instance.tags.split(', ').map( tag => tag.trim()); 
+    instance.name = instance.name.toLowerCase();
   }
 })
 

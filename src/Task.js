@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskDetail from './TaskDetail';
+import axios from 'axios';
 
 class Task extends React.Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class Task extends React.Component {
     this.timer = setInterval(() => {
       this.setState(prevState => {
         return { duration: prevState.duration + 1 }
-      })
+      });
+      const duration = this.state.duration;
+      axios.put(`/tasks/${this.props.task.id}`, {duration, complete: false}) 
     }, 1000)
   }
 
