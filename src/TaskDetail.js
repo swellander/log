@@ -7,6 +7,11 @@ const TaskDetail = ({ duration, start, stop, task, completeTask }) => {
     const m = elapsed.get('minutes') % 60;
     const s = elapsed.get('seconds') % 60;
 
+    const handleComplete = (id, duration) => {
+      stop();
+      completeTask(id, duration);
+    }
+
     return (
        <li className='list-group-item'>
           <h5>{ task.name }</h5>
@@ -17,7 +22,7 @@ const TaskDetail = ({ duration, start, stop, task, completeTask }) => {
           </ul>
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
           <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>
-          <button onClick={() => completeTask(task.id, duration)} type="button" className="btn btn-success">Complete</button>
+          <button onClick={() => handleComplete(task.id, duration)} type="button" className="btn btn-success">Complete</button>
        </li>
     )
 }

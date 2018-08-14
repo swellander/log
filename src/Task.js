@@ -2,10 +2,10 @@ import React from 'react';
 import TaskDetail from './TaskDetail';
 
 class Task extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      duration: 0
+      duration: props.task.duration
     }
     const methodNames = ['start', 'stop'];
     methodNames.forEach(name => this[name] = this[name].bind(this));
