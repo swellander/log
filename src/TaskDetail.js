@@ -1,13 +1,12 @@
 import React from 'react';
 import moment from 'moment';
    
-const TaskDetail = ({ start, stop, task, completeTask }) => {
-    const duration = moment.duration(task.duration, 'seconds');
-    const h = duration.get('hours');
-    const m = duration.get('minutes') % 60;
-    const s = duration.get('seconds') % 60;
+const TaskDetail = ({ duration, start, stop, task, completeTask }) => {
+    const elapsed = moment.duration(duration, 'seconds');
+    const h = elapsed.get('hours');
+    const m = elapsed.get('minutes') % 60;
+    const s = elapsed.get('seconds') % 60;
 
-  console.log('rendering ', task);
     return (
        <li className='list-group-item'>
           <h5>{ task.name }</h5>
@@ -19,7 +18,7 @@ const TaskDetail = ({ start, stop, task, completeTask }) => {
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
           <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>
           <button onClick={() => completeTask(task.id, this.state.elapsed)} type="button" className="btn btn-success">Complete</button>
-        </li>
+       </li>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import TaskControl from './TaskControl';
+import TaskList from './TaskList';
 import NewTaskForm from './NewTaskForm';
 
 
@@ -48,7 +48,7 @@ class Body extends React.Component {
     } 
     return (
       <div style={ divStyle }>
-        <TaskControl tasks={this.state.tasks}/> 
+        <TaskList tasks={this.state.tasks}/> 
         <NewTaskForm addTask={this.addTask}/>
       </div>
     )
