@@ -8,13 +8,15 @@ class Task extends React.Component {
     const { task } = props;
     this.state = {
       duration: task.duration,
-      complete: task.complete
+      complete: task.complete,
+      inProgress: false
     }
     const methodNames = ['handleComplete', 'start', 'stop'];
     methodNames.forEach(name => this[name] = this[name].bind(this));
   }
 
   start() {
+    this.setState({ inProgress: true })
     this.timer = setInterval(() => {
       this.setState(prevState => {
         return { duration: prevState.duration + 1 }
@@ -25,6 +27,7 @@ class Task extends React.Component {
   }
 
   stop() {
+    this.setState({ inProgress: false })
     clearInterval(this.timer);
   }
 
@@ -44,6 +47,7 @@ class Task extends React.Component {
       <div>
         <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
           <span className={completeClass}>{ task.name }</span> 
+          { this.state.inProgress ? <p className="text-right">{this.state.duration}</p> : ''}
         </li>  
         { isSelected ? 
             <TaskDetail 

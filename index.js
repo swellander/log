@@ -14,7 +14,6 @@ today.setHours(0,0,0,0);
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  console.log(req.method, req.url);
   next();
 });
 
@@ -25,13 +24,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
-  console.log(req.body);
   Task.create(req.body)
     .then( newTask => res.send( newTask ));
 });
 
 app.put('/tasks/:id', (req, res, next) => {
-  console.log(req.body);
   Task.update({
     complete: req.body.complete,
     duration: req.body.duration
