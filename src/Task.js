@@ -1,6 +1,8 @@
 import React from 'react';
 import TaskDetail from './TaskDetail';
 import axios from 'axios';
+import { css } from 'react-emotion';
+import { BeatLoader } from 'react-spinners';
 
 class Task extends React.Component {
   constructor(props) {
@@ -43,11 +45,23 @@ class Task extends React.Component {
     const status = isSelected ? 'active' : '';
     const completeClass = this.state.complete ? 'text-success' : '';
 
+    const override = css`
+      display: inline-block;
+      margin: 0 auto;
+      border-color: red;
+    `;
+
     return (
       <div>
         <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
           <span className={completeClass}>{ task.name }</span> 
-          { this.state.inProgress ? <p className="text-right">{this.state.duration}</p> : ''}
+          { this.state.inProgress ? <div className="float-right"><BeatLoader 
+            className={override}
+            sizeUnit={"px"}
+            size={10}
+            color={'#123abc'}
+          /></div>  : ''}
+        
         </li>  
         { isSelected ? 
             <TaskDetail 
