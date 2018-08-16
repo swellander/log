@@ -6,6 +6,7 @@ class NewTaskForm extends React.Component {
     super();
     this.state = {
       name: '',
+      notes: '',
       tags: ''
     }
     this.handleChange = this.handleChange.bind(this);
@@ -23,6 +24,7 @@ class NewTaskForm extends React.Component {
     event.preventDefault();
     let task = {
       name: this.state.name,
+      notes: this.state.notes,
       tags: this.state.tags
     }
 
@@ -50,12 +52,13 @@ class NewTaskForm extends React.Component {
       <div className="col-sm-3 container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>Name</label>
-            <input className="form-control" placeholder="Finish React workshop" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+            <input className="form-control" placeholder="name" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
           </div>
           <div className="form-group">
-            <label>Tags</label>
-            <input className="form-control" placeholder="React, Node, Express" name="tags" type="text" value={this.state.tags} onChange={this.handleChange} />
+            <textarea class="form-control" placeholder="notes" rows="5" name="notes"></textarea>
+          </div>
+          <div className="form-group">
+            <input className="form-control" placeholder="tags"name="tags" type="text" value={this.state.tags} onChange={this.handleChange} />
           </div>
           <input type="submit" className="btn btn-primary" value="Add"/>
         </form> 

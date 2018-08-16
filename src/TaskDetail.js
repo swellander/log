@@ -10,11 +10,10 @@ const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => 
 
     return (
       <li className="list-group-item"> 
-          <h5 className={completeClass}>{ task.name }</h5>
           <h6 className="card-subtitle mb-2 text-muted">{ `${h}:${m}:${s}` }</h6>
           <p className="card-text">{ task.notes }</p>
-          <ul>
-            { task.tags.map( (tag, i) => <li key={i}>{ tag }</li> ) }
+          <ul className="list-inline">
+            { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}>{ tag }</li> ) }
           </ul>
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
           <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>
