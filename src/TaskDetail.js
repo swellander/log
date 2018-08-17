@@ -5,13 +5,16 @@ const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => 
     const elapsed = moment.duration(duration, 'seconds');
     const h = elapsed.get('hours');
     const m = elapsed.get('minutes') % 60;
-    const s = elapsed.get('seconds') % 60;
-    const completeClass = complete ? 'text-success' : '';
+    const s = ('0' + (elapsed.get('seconds') % 60)).slice(-2);
+    const completeClass = complete ? 'text-success' : ''; 
 
     return (
       <li className="list-group-item"> 
           <h6 className="card-subtitle mb-2 text-muted">{ `${h}:${m}:${s}` }</h6>
-          <p className="card-text">{ task.notes }</p>
+          <div className="card-text"> 
+            {task.notes}
+          </div>
+          <hr/>
           <ul className="list-inline">
             { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}>{ tag }</li> ) }
           </ul>

@@ -55,7 +55,7 @@ class NewTaskForm extends React.Component {
             <input className="form-control" placeholder="name" name="name" type="text" value={this.state.name} onChange={this.handleChange} />
           </div>
           <div className="form-group">
-            <textarea class="form-control" placeholder="notes" rows="5" name="notes"></textarea>
+            <textarea className="form-control" placeholder="notes" rows="5" name="notes" value={this.state.notes} onChange={this.handleChange}></textarea>
           </div>
           <div className="form-group">
             <input className="form-control" placeholder="tags"name="tags" type="text" value={this.state.tags} onChange={this.handleChange} />

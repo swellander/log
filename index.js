@@ -26,7 +26,9 @@ app.get('/', (req, res) => {
 
 app.post('/tasks', (req, res) => {
   Task.create(req.body)
-    .then( newTask => res.send( newTask ));
+    .then( newTask => {
+      res.send( newTask )
+    });
 });
 
 app.put('/tasks/:id', (req, res, next) => {
