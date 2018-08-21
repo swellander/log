@@ -21,6 +21,10 @@ class Task extends React.Component {
     if (this.state.inProgress) this.start();
   }
 
+  componentWillUnmount() {
+    this.stop();
+  }
+
   start() {
     //this is redundant
     this.setState({ inProgress: true })
