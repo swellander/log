@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class NewTaskForm extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ class NewTaskForm extends React.Component {
   }
 
   async handleSubmit(event) {
+
     event.preventDefault();
     let task = {
       name: this.state.name,
@@ -31,12 +33,13 @@ class NewTaskForm extends React.Component {
     const { data } = await axios.post('/tasks', task);
     this.props.addTask(data);
       //clear inputs
-    this.setState({ name: '', tags: '', notes: '' })
+    this.setState({ redirect: true, name: '', tags: '', notes: '' })
 
     //update task list
   }
 
   render() {
+    if (this.state.redirect) return <Redirect push to='/' />;
     return (
       <div className="col-sm-3 container">
         <form onSubmit={this.handleSubmit}>
