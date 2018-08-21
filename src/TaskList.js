@@ -26,7 +26,7 @@ class TaskList extends React.Component {
   }
 
   completeTask(id, duration) {
-    axios.put('/tasks/' + id, {duration, complete: true})
+    axios.put('/tasks/' + id, {duration, complete: true, inProgress: false})
       .then( response => console.log(response.data))
       .catch(err => console.log(err));
   }
