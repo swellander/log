@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import TaskList from './TaskList';
 import NewTaskForm from './NewTaskForm';
+import { Switch, Route } from 'react-router-dom';
 
 
 class Body extends React.Component {
@@ -49,8 +50,10 @@ class Body extends React.Component {
     } 
     return (
       <div className="row" style={ divStyle }>
-        <TaskList tasks={this.state.tasks}/> 
-        <NewTaskForm addTask={this.addTask}/>
+        <Switch>
+          <Route exact path='/' render={ (props) => <TaskList tasks={this.state.tasks}/> } />
+          <Route path='/new' render={ (props) => <NewTaskForm addTask={this.addTask}/> } />
+        </Switch>
       </div>
     )
   }

@@ -29,9 +29,10 @@ class TaskList extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { tasks } = this.props;
     return (
-      <div className='offset-sm-1 col-sm-4'>
+      <div className='col-sm-5 container'>
         <h3>{ moment().format('dddd, MMMM Do') }</h3>
         <ul className="list-group">
           {tasks.map( task =>  {
