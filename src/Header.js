@@ -9,13 +9,17 @@ const Header = () => {
 
   return (
     <nav className="nav-fill navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/"><a className="navbar-brand" href="#">CodeLog</a></Link>
-      <ul className="navbar-nav">
+      <Link to="/"><a className="navbar-brand" href="#">
+        <i className="fas fa-swatchbook"></i>og
+      </a></Link>
+      <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link to="/new"><i style={plusStyles} className="fas fa-plus"></i></Link>
         </li>
       </ul>
-     <h3>{ moment().format('dddd, MMMM Do') }</h3>
+      <ul className="nav navbar-nav" style={{float:'right'}}>
+        <h3 >{ moment().format('dddd, MMMM Do') }</h3>
+      </ul>
     </nav> 
   )
 }
