@@ -18,8 +18,12 @@ class Body extends React.Component {
 
   async componentDidMount() {
     const response = await axios.get('/api/tasks/today'); 
-    const todayTasks = response.data.filter( task => new Date(task.updatedAt) > new Date().setHours(0,0,0,0));
-    this.setState({ allTasks: response.data, todayTasks });
+    const unSortedTasks = response.data;
+    const sortedTasks = unSortedTasks.sort( (a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+    const todayTasks = sortedTasks.filter( task => new Date(task.updatedAt) > new Date().setHours(0,0,0,0));
+    this.setState({ allTasks: sortedTasks, todayTasks });
   }
 
   addTask(task) {
