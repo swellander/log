@@ -41,6 +41,7 @@ class Task extends React.Component {
   stop() {
     this.setState({ inProgress: false })
     clearInterval(this.timer);
+    axios.put(`/tasks/${this.props.task.id}`, { inProgress: false });
   }
 
   handleComplete (id, duration) {
