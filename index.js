@@ -32,10 +32,7 @@ app.post('/tasks', (req, res) => {
 });
 
 app.put('/tasks/:id', (req, res, next) => {
-  Task.update({
-    complete: req.body.complete,
-    duration: req.body.duration
-  }, {
+  Task.update(req.body, {
     where: { id: req.params.id }
   })
     .then( updatedTask => res.send(updatedTask))

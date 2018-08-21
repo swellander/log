@@ -14,6 +14,10 @@ const Task = connection.define('task', {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   },
+  inProgress: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }, 
   latitude: {
     type: Sequelize.INTEGER    
   },
@@ -38,8 +42,8 @@ Task.beforeValidate( instance => {
 })
 
 const syncSeed = async () => {
-  await connection.sync({ force: true });
-  await Promise.all(seedTasks.map( task => Task.create(task)));
+  // await connection.sync({ force: true });
+  // await Promise.all(seedTasks.map( task => Task.create(task)));
 }
 
 module.exports = {

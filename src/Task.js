@@ -11,20 +11,26 @@ class Task extends React.Component {
     this.state = {
       duration: task.duration,
       complete: task.complete,
-      inProgress: false
+      inProgress: task.inProgress
     }
     const methodNames = ['handleComplete', 'start', 'stop'];
     methodNames.forEach(name => this[name] = this[name].bind(this));
   }
 
+  componentDidMount() {
+    if (this.state.inProgress) this.start();
+  }
+
   start() {
+    //this is redundant
     this.setState({ inProgress: true })
+    
     this.timer = setInterval(() => {
       this.setState(prevState => {
         return { duration: prevState.duration + 1 }
       });
       const duration = this.state.duration;
-      axios.put(`/tasks/${this.props.task.id}`, {duration, complete: false}) 
+      axios.put(`/tasks/${this.props.task.id}`, {duration, complete: false, inProgress: true}) // repeatedly setting complete and inProgress is redundant
     }, 1000)
   }
 
@@ -50,6 +56,8 @@ class Task extends React.Component {
       margin: 0 auto;
       border-color: red;
     `;
+
+    //if before page refresh task was in progress, resume timer
 
     return (
       <div>

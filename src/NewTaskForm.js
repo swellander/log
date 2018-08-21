@@ -30,19 +30,8 @@ class NewTaskForm extends React.Component {
 
     const { data } = await axios.post('/tasks', task);
     this.props.addTask(data);
-   
-    //get coordinates
-    // await navigator.geolocation.getCurrentPosition( position => {
-    //   task.latitude = position.coords.latitude;
-    //   task.longitude = position.coords.longitude;
-    //   console.log(task);
-    //   axios.post('/tasks', task)
-    // })
-    
-    
-
-    //clear inputs
-    this.setState({ name: '', tags: '' })
+      //clear inputs
+    this.setState({ name: '', tags: '', notes: '' })
 
     //update task list
   }
