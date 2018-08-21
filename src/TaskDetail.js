@@ -4,7 +4,7 @@ import moment from 'moment';
 const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => {
     const elapsed = moment.duration(duration, 'seconds');
     const h = elapsed.get('hours');
-    const m = elapsed.get('minutes') % 60;
+    const m = ('0' + (elapsed.get('minutes') % 60)).slice(-2);
     const s = ('0' + (elapsed.get('seconds') % 60)).slice(-2);
     const completeClass = complete ? 'text-success' : ''; 
 

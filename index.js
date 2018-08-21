@@ -20,9 +20,9 @@ app.use((req, res, next) => {
 app.use('/dist', express.static('dist'));
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src/index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'src/index.html'));
+// });
 
 app.post('/tasks', (req, res) => {
   Task.create(req.body)
@@ -39,6 +39,12 @@ app.put('/tasks/:id', (req, res, next) => {
     .catch(next);
 });
 
+app.get('/api/tasks', (req, res, next) => {
+  Task.findAll()
+    .then( tasks => res.json(tasks) )
+    .catch(next);
+})
+
 app.get('/api/tasks/today', (req, res, next) => {
   Task.findAll({
     where: {
@@ -47,7 +53,7 @@ app.get('/api/tasks/today', (req, res, next) => {
       }
     }
   })
-    .then( tasks => res.send(tasks))
+    .then( tasks => res.json(tasks))
     .catch(next);
 });
 

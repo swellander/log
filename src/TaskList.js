@@ -29,7 +29,6 @@ class TaskList extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { tasks } = this.props;
     return (
       <div className='col-sm-5 container'>
