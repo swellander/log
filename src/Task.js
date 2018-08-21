@@ -63,10 +63,13 @@ class Task extends React.Component {
     `;
 
     //if before page refresh task was in progress, resume timer
+    const styles = {
+        cursor: 'pointer'
+    };
 
     return (
       <div>
-        <li onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
+        <li style={styles} onClick={() => handleSelectTask(task.id)} className={`list-group-item ${status}`}>
           <span className={completeClass}>{ task.name }</span> 
           { this.state.inProgress ? <div className="float-right"><BeatLoader 
             className={override}
