@@ -18,11 +18,14 @@ class Task extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.inProgress) this.start();
+    if (this.state.inProgress) {
+      this.start();
+    }
   }
 
   componentWillUnmount() {
-    this.stop();
+    //this is the source of err
+    // this.stop();
   }
 
   start() {
@@ -39,6 +42,7 @@ class Task extends React.Component {
   }
 
   stop() {
+    console.log('this is def the err')
     this.setState({ inProgress: false })
     clearInterval(this.timer);
     axios.put(`/tasks/${this.props.task.id}`, { inProgress: false });

@@ -26,6 +26,7 @@ class TaskList extends React.Component {
   }
 
   completeTask(id, duration) {
+    console.log(id, 'completed');
     axios.put('/tasks/' + id, {duration, complete: true, inProgress: false})
       .then( response => console.log(response.data))
       .catch(err => console.log(err));
@@ -35,7 +36,6 @@ class TaskList extends React.Component {
   render() {
     const { tasks } = this.props;
     const path = this.props.location.pathname;
-    console.log(path);
     return (
       <div className='col-sm-5 container'>
         <ul className="nav nav-tabs">

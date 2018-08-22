@@ -9,9 +9,9 @@ const Header = () => {
 
   return (
     <nav className="nav-fill navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/"><a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="/">
         <i className="fas fa-swatchbook"></i>og
-      </a></Link>
+      </Link>
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link to="/new"><i style={plusStyles} className="fas fa-plus"></i></Link>
