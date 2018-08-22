@@ -2,19 +2,46 @@ import React from 'react';
 import Task from './Task';
 import axios from 'axios';
 import moment from 'moment';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const component = withRouter(props => <TaskList {...props}/>);
+const sortByDate = (list) => {
+  return list.sort( (a, b) => {
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  });
+}
 
 class TaskList extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedTask: {} 
+      selectedTask: {},
+      tasks: []
     }
+    this.getTodayTasks = this.getTodayTasks.bind(this);
+    this.getAllTasks = this.getAllTasks.bind(this);
     this.completeTask = this.completeTask.bind(this); 
     this.onSelectTask = this.onSelectTask.bind(this);
   }
+
+  getTodayTasks() {
+    axios.get('/api/tasks/today') 
+      .then( ({ data }) => this.setState({ tasks: sortByDate(data) }))
+      .catch(err => console.log(err))
+  }
+
+  getAllTasks() {
+    axios.get('/api/tasks') 
+      .then( ({ data }) => this.setState({ tasks: sortByDate(data) }))
+      .catch(err => console.log(err))
+  }
+
+  componentDidMount() {
+    const { pathname } = this.props.location;
+    console.log('mounted', pathname);
+    if (pathname === '/') this.getTodayTasks();
+    else this.getAllTasks();
+  }
+
 
   async onSelectTask(id) {
     if(this.state.selectedTask.id === id) {
@@ -34,20 +61,19 @@ class TaskList extends React.Component {
 
 
   render() {
-    const { tasks } = this.props;
-    const path = this.props.location.pathname;
+    const { pathname } = this.props.location;
     return (
       <div className='col-sm-5 container'>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <Link className={`nav-link ${ path === '/' ? 'active' : '' }`} to='/'>Today</Link>
+            <Link className={`nav-link ${ pathname === '/' ? 'active' : '' }`} to='/'>Today</Link>
           </li>
           <li className="nav-item">
-            <Link className={`nav-link ${ path === '/backlog' ? 'active' : '' }`} to='/backlog'>Backlog</Link>
+            <Link className={`nav-link ${ pathname === '/backlog' ? 'active' : '' }`} to='/backlog'>Backlog</Link>
           </li>
         </ul>
         <ul className="list-group">
-          {tasks.map( task =>  {
+          {this.state.tasks.map( task =>  {
             return (
               <Task 
                 completeTask={this.completeTask}
@@ -64,4 +90,4 @@ class TaskList extends React.Component {
   }
 };
 
-export default component;
+export default TaskList;

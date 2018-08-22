@@ -31,7 +31,6 @@ class NewTaskForm extends React.Component {
     }
 
     const { data } = await axios.post('/tasks', task);
-    this.props.addTask(data);
       //clear inputs
     this.setState({ redirect: true, name: '', tags: '', notes: '' })
 

@@ -25,7 +25,7 @@ class Task extends React.Component {
 
   componentWillUnmount() {
     //this is the source of err
-    // this.stop();
+    clearInterval(this.timer);
   }
 
   start() {
