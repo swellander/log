@@ -16,7 +16,7 @@ const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => 
           </div>
           <hr/>
           <ul className="list-inline">
-            { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}>{ tag }</li> ) }
+            { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}><i class={`devicon-${tag}-plain`}></i></li> ) }
           </ul>
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
           <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>

@@ -62,6 +62,7 @@ class TaskList extends React.Component {
 
   render() {
     const { pathname } = this.props.location;
+    const empty = <div style={{textAlign: 'center', marginTop: '30px'}}><h3>All Clear Here</h3></div>;
     return (
       <div className='col-sm-5 container'>
         <ul className="nav nav-tabs">
@@ -73,6 +74,7 @@ class TaskList extends React.Component {
           </li>
         </ul>
         <ul className="list-group">
+          { this.state.tasks.length === 0 ? empty : '' }
           {this.state.tasks.map( task =>  {
             return (
               <Task 

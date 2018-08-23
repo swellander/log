@@ -19,7 +19,7 @@ const Body = () => {
         {/* added keys to <Route/> to be able to prompt component re-render (https://stackoverflow.com/questions/47804798/how-to-re-render-the-same-component-being-used-in-different-routes) */}
         <Route key={2} exact path='/' component={TaskList} />
         <Route key={1} path='/backlog' component={TaskList} />
-        <Route path='/new' render={ (props) => <NewTaskForm addTask={this.addTask}/> } />
+        <Route path='/new' component={NewTaskForm} />
       </Switch>
     </div>
   )

@@ -39,6 +39,10 @@ app.put('/tasks/:id', (req, res, next) => {
     .catch(next);
 });
 
+app.delete('/tasks/:id', (req, res, next) => {
+  console.log("DELETE");
+})
+
 app.get('/api/tasks', (req, res, next) => {
   Task.findAll()
     .then( tasks => res.json(tasks) )
