@@ -1,5 +1,6 @@
-#Get Started
-```npm i
+## Get Started
+```
+npm i
 npm run start:dev
 ```
 
