@@ -3,6 +3,7 @@ import axios from 'axios';
 //import Graph from './Graph'
 import TaskList from './TaskList';
 import NewTaskForm from './NewTaskForm';
+import Calendar from './Calendar'
 import { Switch, Route } from 'react-router-dom';
 
 
@@ -20,6 +21,7 @@ const Body = () => {
         <Route key={2} exact path='/' component={TaskList} />
         <Route key={1} path='/backlog' component={TaskList} />
         <Route path='/new' component={NewTaskForm} />
+        <Route path='/calendar' component={Calendar} />
       </Switch>
     </div>
   )

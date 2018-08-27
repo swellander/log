@@ -16,6 +16,10 @@ const Header = () => {
         <li className="nav-item">
           <Link to="/new"><i style={plusStyles} className="fas fa-plus"></i></Link>
         </li>
+        <li> |   |</li>
+        <li>
+          <Link to="/calendar"><i style={plusStyles} className="fas fa-calendar">Calendar</i></Link>
+        </li>
       </ul>
       <ul className="nav navbar-nav" style={{float:'right'}}>
         <h3 >{ moment().format('dddd, MMMM Do') }</h3>
