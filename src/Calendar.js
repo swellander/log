@@ -20,7 +20,7 @@ export default class Calendar extends React.Component {
       <div className="offset-4 col-md-6">
         <h1>Welcome to Calendaring</h1> 
         <p><em>The dopest Calendar App you never knew you needed.</em></p>
-        <p>Click this <button onClick={this.handleClick}>Button</button> and take 7 seconds to imagine what you'd want to see here...</p>
+        <p>Click this <button onClick={this.handleClick}>Button</button> and take 7 seconds to imagine what you would want to see here...</p>
         <br/>
         <br/>
         <br/>
