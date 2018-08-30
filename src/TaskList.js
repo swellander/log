@@ -21,6 +21,7 @@ class TaskList extends React.Component {
     this.getAllTasks = this.getAllTasks.bind(this);
     this.completeTask = this.completeTask.bind(this); 
     this.onSelectTask = this.onSelectTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   getTodayTasks() {
@@ -59,6 +60,10 @@ class TaskList extends React.Component {
       .catch(err => console.log(err));
   }
 
+  deleteTask(id) {
+    axios.delete('/api/tasks/' + id)
+      .then(() => this.setState({ tasks: this.state.tasks.filter( task => task.id !== id ) }))
+  }
 
   render() {
     const { pathname } = this.props.location;
@@ -83,6 +88,7 @@ class TaskList extends React.Component {
                 selectedTask={this.state.selectedTask}
                 key={task.id} 
                 task={task} 
+                deleteTask={this.deleteTask}
               />
             )
           })} 

@@ -24,7 +24,6 @@ class Task extends React.Component {
   }
 
   componentWillUnmount() {
-    //this is the source of err
     clearInterval(this.timer);
   }
 
@@ -91,6 +90,7 @@ class Task extends React.Component {
               stop={this.stop}
               completeTask={this.handleComplete}
               complete={this.state.complete}
+              deleteTask={this.props.deleteTask}
             /> : '' }
       </div>
     )

@@ -39,9 +39,11 @@ app.put('/tasks/:id', (req, res, next) => {
     .catch(next);
 });
 
-app.delete('/tasks/:id', (req, res, next) => {
-  console.log("DELETE");
-})
+app.delete('/api/tasks/:id', (req, res, next) => {
+  Task.destroy({where: {id: req.params.id}})
+    .then(task => res.sendStatus(200))
+    .catch(next)
+});
 
 app.get('/api/tasks', (req, res, next) => {
   Task.findAll()
@@ -67,7 +69,6 @@ app.get('/api/tasks/:id', (req, res) => {
   })
     .then( task => res.send(task) );
 });
-
 
 
 syncSeed() 

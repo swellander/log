@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
    
-const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => {
+const TaskDetail = ({ complete, duration, start, stop, task, completeTask, deleteTask }) => {
     const elapsed = moment.duration(duration, 'seconds');
     const h = elapsed.get('hours');
     const m = ('0' + (elapsed.get('minutes') % 60)).slice(-2);
@@ -16,11 +16,12 @@ const TaskDetail = ({ complete, duration, start, stop, task, completeTask }) => 
           </div>
           <hr/>
           <ul className="list-inline">
-            { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}><i class={`devicon-${tag}-plain`}></i></li> ) }
+            { task.tags.map( (tag, i) => <li className="list-inline-item" key={i}><i className={`devicon-${tag}-plain`}></i></li> ) }
           </ul>
           <button type="button" className="btn btn-primary" onClick={() => start()}>Start</button>
-          <button type="button" className="btn btn-danger" onClick={() => stop()}>Stop</button>
+          <button type="button" className="btn btn-warning" onClick={() => stop()}>Stop</button>
           <button onClick={() => completeTask(task.id, duration)} type="button" className="btn btn-success">Complete</button>
+          <button type="button" className="btn btn-danger" onClick={() => deleteTask(task.id)}>Delete</button>
        </li>
     )
 }
