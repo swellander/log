@@ -3,6 +3,7 @@ import Task from './Task';
 import axios from 'axios';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import store, { newLoadAction } from './store';
 
 const sortByDate = (list) => {
   return list.sort( (a, b) => {
@@ -11,40 +12,33 @@ const sortByDate = (list) => {
 }
 
 class TaskList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedTask: {},
-      tasks: []
-    }
-    this.getTodayTasks = this.getTodayTasks.bind(this);
-    this.getAllTasks = this.getAllTasks.bind(this);
-    this.completeTask = this.completeTask.bind(this); 
-    this.onSelectTask = this.onSelectTask.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-  }
+  state = store.getState();
 
-  getTodayTasks() {
+  getTodayTasks = () => {
     axios.get('/api/tasks/today') 
-      .then( ({ data }) => this.setState({ tasks: sortByDate(data) }))
+      .then( ({ data }) => store.dispatch(newLoadAction(data)))
       .catch(err => console.log(err))
   }
 
-  getAllTasks() {
+  getAllTasks = () => {
     axios.get('/api/tasks') 
-      .then( ({ data }) => this.setState({ tasks: sortByDate(data) }))
+      .then( ({ data }) => store.dispatch({ type: 'LOAD_TASKS', tasks: data }))
       .catch(err => console.log(err))
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { pathname } = this.props.location;
     console.log('mounted', pathname);
     if (pathname === '/') this.getTodayTasks();
     else this.getAllTasks();
+
+    store.subscribe(() => {
+      this.setState(store.getState);
+    })
   }
 
 
-  async onSelectTask(id) {
+  onSelectTask = async id => {
     if(this.state.selectedTask.id === id) {
       this.setState({ selectedTask: {} });
       return;
@@ -53,14 +47,14 @@ class TaskList extends React.Component {
     this.setState({ selectedTask: response.data });
   }
 
-  completeTask(id, duration) {
+  completeTask = (id, duration) => {
     console.log(id, 'completed');
     axios.put('/tasks/' + id, {duration, complete: true, inProgress: false})
       .then( response => console.log(response.data))
       .catch(err => console.log(err));
   }
 
-  deleteTask(id) {
+  deleteTask = (id) => {
     axios.delete('/api/tasks/' + id)
       .then(() => this.setState({ tasks: this.state.tasks.filter( task => task.id !== id ) }))
   }
@@ -79,7 +73,7 @@ class TaskList extends React.Component {
           </li>
         </ul>
         <ul className="list-group">
-          { this.state.tasks.length === 0 ? empty : '' }
+          {this.state.tasks.length === 0 ? empty : '' }
           {this.state.tasks.map( task =>  {
             return (
               <Task 

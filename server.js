@@ -48,7 +48,7 @@ app.delete('/api/tasks/:id', (req, res, next) => {
 app.get('/api/tasks', (req, res, next) => {
   Task.findAll()
     .then( tasks => res.json(tasks) )
-    .catch(next);
+    .catch(err => console.log('UH OH', err));
 })
 
 app.get('/api/tasks/today', (req, res, next) => {

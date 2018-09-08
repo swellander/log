@@ -46,8 +46,8 @@ Task.beforeValidate( instance => {
 })
 
 const syncSeed = async () => {
-  // await connection.sync({ force: true });
-  // await Promise.all(seedTasks.map( task => Task.create(task)));
+  await connection.sync({ force: true });
+  await Promise.all(seedTasks.map( task => Task.create(task)));
 }
 
 module.exports = {
