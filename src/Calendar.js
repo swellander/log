@@ -16,15 +16,27 @@ export default class Calendar extends React.Component {
   }
 
   render() {
+    let daysPerWk = 7
+    let totalDays = 31
+    let monthTable = []
+    let wk = []
+    while(totalDays >= 0) {
+      if(daysPerWk === 0 || totalDays === 0){
+        monthTable.push(wk)
+        wk = []
+        daysPerWk = 7
+      }
+      wk.push('')
+      daysPerWk--
+      totalDays--
+    }
+    totalDays = 31
+
     return (
       <div className="offset-4 col-md-6">
-        <h1>Welcome to Calendaring</h1> 
-        <p><em>The dopest Calendar App you never knew you needed.</em></p>
-        <p>Click this <button onClick={this.handleClick}>Button</button> and take 7 seconds to imagine what you would want to see here...</p>
-        <br/>
-        <br/>
-        <br/>
-        {this.state.done ? <div className="jumbotron"><h1>Ok!</h1><hr/><p> Now head on over to /src/Calendar.js and start messing around</p></div> : '' }
+        {monthTable.map(wk=>{
+
+        })}
       </div>
     )
   }
