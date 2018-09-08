@@ -1,6 +1,6 @@
 module.exports = {
 	mode: 'development',
-	entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './client/src'],
   resolve: {
   	extensions: ['.js', '.jsx', '.less']
 	},

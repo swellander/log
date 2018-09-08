@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from 'react';
 
-
-
 export default class Calendar extends Component {
   constructor() {
     super();

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon node_modules/.bin/mocha",
-    "start:dev": "npm run webpack -- --watch & DATABASE_URL=postgres://localhost:5432/code_log nodemon server.js --ignore src/ --ignore dist/",
+    "start:dev": "npm run webpack -- --watch & DATABASE_URL=postgres://localhost:5432/code_log nodemon server --ignore src/ --ignore dist/",
     "webpack": "webpack"
   },
   "author": "",
