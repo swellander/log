@@ -31,6 +31,10 @@ const Task = connection.define('task', {
   duration: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  date: {
+    type: Sequelize.DATE,
+    defaultValue: null
   }
 });
 
